@@ -1,24 +1,26 @@
 var gui = new dat.GUI();
 var params = {
-    widthHead: 200,
-    heightHead: 229,
+    randomSeed: 0,
+    nbRectangle: 100,
     Download_Image: function () { return save(); },
 };
-gui.add(params, "widthHead", 200, 1000, 1);
-gui.add(params, "heightHead", 229, 1000, 1);
+gui.add(params, "randomSeed", 0, 200, 1);
+gui.add(params, "nbRectangle", 0, 500, 1);
 gui.add(params, "Download_Image");
 function draw() {
-    background('green');
-    fill('yellow');
-    rectMode(CENTER);
+    background('white');
+    randomSeed(params.randomSeed);
+    var widthR, heightR = 0;
+    var colors = ['red', 'green', 'blue'];
+    var color;
     noStroke();
-    rect(width / 2, height - 200, 700, 300);
-    fill('red');
-    triangle((width / 2) - 350, height - 350, (height / 2), (width / 2) - 100, (width / 2) + 350, height - 350);
-    fill('darkred');
-    triangle((width / 2) + 380, height - 370, (height / 2), (width / 2) - 100, (width / 2) + 350, height - 350);
-    fill('orange');
-    quad((width / 2) + 380, height - 370, (width / 2) + 350, height - 350, (width / 2) + 350, height - 50, (width / 2) + 380, height - 70);
+    for (var i = 0; i < params.nbRectangle; i++) {
+        color = random(colors);
+        fill(color);
+        widthR = random(1, 70);
+        heightR = random(1, 70);
+        rect(random(width), random(height), widthR, heightR);
+    }
 }
 function setup() {
     p6_CreateCanvas();

@@ -5,12 +5,12 @@
 const gui = new dat.GUI()
 const params = {
     
-    widthHead: 200,
-    heightHead: 229,
+    randomSeed: 0,
+    nbRectangle : 100,
     Download_Image: () => save(),
 }
-gui.add(params, "widthHead", 200, 1000, 1)
-gui.add(params, "heightHead", 229, 1000, 1)
+gui.add(params, "randomSeed",0, 200, 1)
+gui.add(params, "nbRectangle",0, 500, 1)
 gui.add(params, "Download_Image")
 
 // -------------------
@@ -18,7 +18,22 @@ gui.add(params, "Download_Image")
 // -------------------
 
 function draw() {
-
+    background('white')
+    
+    randomSeed(params.randomSeed);
+    let widthR, heightR = 0; 
+    const colors = ['red', 'green', 'blue'];
+    let color;
+    noStroke();
+    
+    for(let i = 0; i < params.nbRectangle; i++){
+        color = random(colors)
+        
+        fill(color);
+        widthR = random(1, 70);
+        heightR = random(1, 70);
+        rect(random(width), random(height), widthR, heightR)
+    }
 
 }
 
